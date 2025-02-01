@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartinha</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #e0f7fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('bg.jpg'); /* Adicione uma imagem de fundo */
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Torne o fundo do container semi-transparente */
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            max-width: 600px;
+        }
+        img {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            font-size: 18px;
+            padding: 12px 24px;
+            background-color: #007bb5;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #005f87;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Título da cartinha -->
+        <h1>Cartinha para Você</h1>
+        <!-- Texto da cartinha -->
+        <p>Meu amor, você é a melhor parte do meu dia. Aqui estão algumas fotos dos nossos momentos mais especiais.</p>
+        <!-- Imagens dos momentos especiais -->
+        <img src="sua-imagem1.jpg" alt="Foto de Nós Dois 1">
+        <img src="sua-imagem2.jpg" alt="Foto de Nós Dois 2">
+        <!-- Mensagem de amor -->
+        <p>Te amo mais do que palavras podem expressar.</p>
+        <!-- Botão para prosseguir para a próxima tela -->
+        <button class="button" onclick="nextScreen()">Próxima Tela</button>
+    </div>
+    <script>
+        // Função para prosseguir para a próxima tela
+        function nextScreen() {
+            window.location.href = 'mensagem_final.html'; // Link para a próxima tela
+        }
+    </script>
+</body>
+</html>

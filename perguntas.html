@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perguntas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        body {
+            font-family: 'Pacifico', cursive;
+            background-color: #ffebf1;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('bg.jpg');
+            background-size: cover;
+            background-position: center;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { background-color: #ffebf1; }
+            50% { background-color: #fffcf2; }
+            100% { background-color: #ffebf1; }
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .question {
+            font-size: 24px;
+            color: #e91e63;
+            margin-bottom: 20px;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .option {
+            background-color: #e91e63;
+            color: white;
+            padding: 15px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .option:hover {
+            background-color: #c2185b;
+            transform: scale(1.05);
+        }
+
+        .button {
+            font-size: 18px;
+            padding: 12px 24px;
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+            display: none;
+        }
+
+        .button:hover {
+            background-color: #c2185b;
+            transform: scale(1.1);
+        }
+
+        .image-container {
+            margin: 20px 0;
+        }
+
+        .image {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Perguntas</h1>
+        <div class="question" id="question"></div>
+        <div class="image-container" id="imageContainer"></div>
+        <div class="options">
+            <button class="option" id="option1" onclick="checkAnswer(1)"></button>
+            <button class="option" id="option2" onclick="checkAnswer(2)"></button>
+            <button class="option" id="option3" onclick="checkAnswer(3)"></button>
+            <button class="option" id="option4" onclick="checkAnswer(4)"></button>
+        </div>
+        <button class="button" id="nextButton" onclick="nextQuestion()">Próxima Pergunta</button>
+        <audio id="backgroundMusic" src="musica-romantica.mp3" autoplay loop></audio>
+        <audio id="correctSound" src="som-acerto.mp3"></audio>
+        <audio id="wrongSound" src="som-erro.mp3"></audio>
+    </div>
+    <script>
+        // Perguntas e respostas
+        const questions = [
+            {
+                question: 'Qual é a sua cor favorita?',
+                answers: ['Azul', 'Vermelho', 'Verde', 'Amarelo'],
+                correct: 1,
+                image: 'cores.jpg'
+            },
+            {
+                question: 'Qual é a Minha cor favorita?',
+                answers: ['azul', 'roxo', 'preto', 'verde'],
+                correct: 2,
+                image: 'cores.jpg'
+            },
+            {
+                question: 'Quando nois comçamos a namora ?',
+                answers: ['4 de novembro', '23 outubro', 'setembro 5', '6 outubro'],
+                correct: 1,
+                image: 'baixados.jpeg'
+            },
+            {
+                question: 'Que dia que nós se conhecemos ?',
+                answers: ['30 de agosto', '4 de setembro', '22 de agosto', '7 de setembro'],
+                correct: 1,
+                image: 'Captura de tela 2025-01-31 143819.png '
+            },
+            {
+                question: 'Você me ama  ?',
+                answers: ['Claro que sim amor ', ' sim bobo', 'não te odeio', 'sim confia'],
+                correct: 2,
+                image: 'Captura de tela 2025-01-31 143229.png'
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        // Função para carregar a pergunta
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('question').innerText = question.question;
+            document.getElementById('option1').innerText = question.answers[0];
+            document.getElementById('option2').innerText = question.answers[1];
+            document.getElementById('option3').innerText = question.answers[2];
+            document.getElementById('option4').innerText = question.answers[3];
+            document.getElementById('nextButton').style.display = 'none';
+
+            if (question.image) {
+                document.getElementById('imageContainer').innerHTML = `<img src="${question.image}" alt="Imagem da pergunta" class="image">`;
+            } else {
+                document.getElementById('imageContainer').innerHTML = '';
+            }
+
+            if (currentQuestion === questions.length - 1) {
+                document.getElementById('nextButton').innerText = 'Próximo Minigame';
+            } else {
+                document.getElementById('nextButton').innerText = 'Próxima Pergunta';
+            }
+        }
+
+        // Função para verificar a resposta
+        function checkAnswer(answer) {
+            const question = questions[currentQuestion];
+            const correctSound = document.getElementById('correctSound');
+            const wrongSound = document.getElementById('wrongSound');
+            
+            if (answer === question.correct) {
+                correctSound.play();
+                if (currentQuestion === questions.length - 1) {
+                    document.getElementById('question').innerText = 'Você acertou! Está indo muito bem. Vamos ver se consegue continuar assim. Boa sorte, amor! 💖';
+                } else {
+                    document.getElementById('question').innerText = 'Você acertou! Está pronta para a próxima?';
+                }
+                document.getElementById('nextButton').style.display = 'block';
+            } else {
+                wrongSound.play();
+                document.getElementById('question').innerText = 'Você errou! Tente novamente.';
+            }
+        }
+
+        // Função para carregar a próxima pergunta
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                window.location.href = 'minegamecoração.html'; // Link para a próxima tela
+            }
+        }
+
+        // Carregar a primeira pergunta
+        loadQuestion();
+    </script>
+</body>
+</html>

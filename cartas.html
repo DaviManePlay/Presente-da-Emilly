@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Cartas Romântico</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script&display=swap');
+
+        @keyframes backgroundAnimation {
+            0% { background-color: #fde2e4; }
+            50% { background-color: #fff5f5; }
+            100% { background-color: #fde2e4; }
+        }
+
+        body {
+            font-family: 'Pacifico', cursive;
+            background-color: #fde2e4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: backgroundAnimation 10s infinite;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff5f5;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            max-width: 90%;
+            box-sizing: border-box;
+        }
+
+        .hidden-message {
+            display: none;
+            font-size: 24px;
+            color: #e63946;
+            margin-top: 20px;
+        }
+
+        .cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .card {
+            width: 100px;
+            height: 140px;
+            background-color: #e63946;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 24px;
+            border-radius: 10px;
+            transition: transform 0.3s, background-color 0.3s, color 0.3s;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 10px;
+            box-sizing: border-box;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            background-color: #f08080;
+        }
+
+        .card .front, .card .back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+        }
+
+        .card .front {
+            background-color: #e63946;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .card .back {
+            background-color: #fff;
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .card.revealed .front {
+            transform: rotateY(180deg);
+        }
+
+        .card.revealed .back {
+            transform: rotateY(0deg);
+        }
+
+        .card img {
+            display: none;
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card.revealed img {
+            display: block;
+        }
+
+        .button {
+            font-family: 'Dancing Script', cursive;
+            font-size: 18px;
+            padding: 12px 24px;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s;
+            display: none;
+        }
+
+        .button:hover {
+            background-color: #a4161a;
+            transform: scale(1.1);
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: float 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .heart-pulse {
+            animation: pulse 1.5s infinite;
+        }
+
+        .message {
+            display: none;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            font-size: 18px;
+            transition: opacity 0.3s;
+        }
+
+        .card.revealed .message {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Jogo de Cartas Romântico <span class="heart-pulse">❤️</span></h1>
+        <div class="cards">
+            <div class="card" onclick="revealCard(this, 1)">
+                <div class="front">?</div>
+                <div class="back">
+                    <img src="foto1.jpg" alt="Foto 1">
+                    <div class="message">Você é incrível!</div>
+                </div>
+            </div>
+            <div class="card" onclick="revealCard(this, 2)">
+                <div class="front">?</div>
+                <div class="back">
+                    <img src="foto2.jpg" alt="Foto 2">
+                    <div class="message">Te amo!</div>
+                </div>
+            </div>
+            <div class="card" onclick="revealCard(this, 3)">
+                <div class="front">?</div>
+                <div class="back">
+                    <img src="foto3.jpg" alt="Foto 3">
+                    <div class="message">Minha princesa!</div>
+                </div>
+            </div>
+            <div class="card" onclick="revealCard(this, 4)">
+                <div class="front">?</div>
+                <div class="back">
+                    <img src="foto4.jpg" alt="Foto 4">
+                    <div class="message">Sempre juntos!</div>
+                </div>
+            </div>
+        </div>
+        <p class="hidden-message" id="hiddenMessage">Você é a pessoa que ilumina meus dias e faz meu coração sorrir,<br>
+             Te amo mais do que palavras podem expressar, Você é meu amor!</p>
+        <button class="button" id="nextButton" onclick="nextGame()">Prosseguir</button>
+        <audio id="soundEffect" src="som-fofo.mp3" preload="auto"></audio>
+        <audio id="backgroundMusic" src="musica-romantica.mp3" preload="auto"></audio>
+    </div>
+    <script>
+        let revealedCount = 0;
+        const music = document.getElementById('soundEffect');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+
+        function createHearts(colors) {
+            colors.forEach(color => {
+                for (let i = 0; i < 20; i++) {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerText = '❤️' ;
+                    heart.style.color = color;
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.animationDuration = `${Math.random() * 2 + 1}s`;
+                    heart.style.animationDelay = `${Math.random() * 2}s`;
+                    document.body.appendChild(heart);
+
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 3000);
+                }
+            });
+        }
+
+        function revealCard(card, id) {
+            if (!card.classList.contains('revealed')) {
+                card.classList.add('revealed');
+
+                if (revealedCount === 0) {
+                    backgroundMusic.play();
+                }
+
+                let colors;
+                if (revealedCount === 0) {
+                    colors = ['blue'];
+                } else if (revealedCount === 1) {
+                    colors = ['red'];
+                } else {
+                    colors = ['blue', 'red'];
+                }
+                createHearts(colors);
+
+                music.play();
+
+                revealedCount++;
+                if (revealedCount === 4) {
+                    document.getElementById('hiddenMessage').style.display = 'block';
+                    document.getElementById('nextButton').style.display = 'block';
+                }
+            }
+        }
+
+        function nextGame() {
+
+            alert("Boa sorte, amor! Agora são as perguntinhas. Boa sorte! 💖");
+            window.location.href = 'perguntas.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encontre o Amor Correto</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="start-screen" class="screen">
+        <h1>Encontre o Amor Correto</h1>
+        <div class="heart-beating">❤️</div>
+        <button id="start-button">Começar</button>
+    </div>
+    <div id="game-container" class="screen hidden">
+        <div id="timer">Tempo: <span id="time">00:15</span></div>
+        <div id="hearts-container"></div>
+        <div id="message"></div>
+    </div>
+    <div id="game-over-screen" class="screen hidden">
+        <h1>Você não encontrou seu amor</h1>
+        <div class="heart-broken">💔</div>
+        <button id="retry-button">Recomeçar</button>
+    </div>
+    <div id="victory-screen" class="screen hidden">
+        <h1>Parabéns! Você encontrou seu amor certo</h1>
+        <div class="heart-beating-large">💖</div>
+        <button id="present-button">Ir para seu presente</button>
+        <div class="popup hidden">
+            <p>Meu presente eu já ganhei há muito tempo, que é você. Agora vou te dar esse presente, espero que goste. Com muito carinho, seu nego Davi. Te amo muitoooo, Emilly!</p>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minigame do Coração</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Dancing+Script&display=swap');
+
+        body {
+            font-family: 'Dancing Script', cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fde2e4;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .container {
+            position: relative;
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff5f5;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-text {
+            font-size: 28px;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            font-size: 24px;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        .heart {
+            font-size: 100px;
+            color: #e63946;
+            transition: transform 0.1s;
+            display: none;
+        }
+
+        .message {
+            font-size: 24px;
+            color: #e63946;
+            display: none;
+        }
+
+        .buttons {
+            margin-top: 20px;
+        }
+
+        .button {
+            font-family: 'Pacifico', cursive;
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #e63946;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .button:hover {
+            background-color: #a4161a;
+            transform: scale(1.1);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .timer, .clicks-counter {
+            font-size: 24px;
+            color: #e63946;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .circle-timer {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            font-size: 24px;
+            color: #e63946;
+            display: none;
+        }
+
+        .circle-timer svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .circle-timer .progress {
+            stroke: #e63946;
+            stroke-width: 10;
+            fill: none;
+            r: 45;
+            cx: 50;
+            cy: 50;
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 1s linear;
+        }
+
+        .countdown {
+            font-size: 48px;
+            color: #e63946;
+            animation: countdownAnimation 1s steps(3, end) 1;
+        }
+
+        @keyframes countdownAnimation {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-text" id="headerText">Encha meu coração de carinho</div>
+        <div class="intro-text" id="introText">Neste minigame, você vai ter que encher meu coração de carinho e amor! 💖</div>
+        <button class="button" id="startButton" onclick="startGame()">Iniciar</button>
+        <div class="circle-timer" id="circleTimer">
+            <svg viewBox="0 0 100 100">
+                <circle class="progress" id="progressBar" />
+            </svg>
+            <span id="timerText">10</span>
+        </div>
+        <div id="heart" class="heart">❤️</div>
+        <p id="clicksCounter" class="clicks-counter">Cliques: 0</p>
+        <p id="gameMessage" class="message"></p>
+        <div class="buttons hidden" id="buttons">
+            <button class="button" id="nextGameButton" onclick="nextGame()">Próximo Jogo</button>
+            <button class="button" id="restartButton" onclick="restartGame()">Recomeçar</button>
+        </div>
+        <audio id="winSound" src="som-ganhar.mp3" preload="auto"></audio>
+        <audio id="loseSound" src="som-perder.mp3" preload="auto"></audio>
+    </div>
+
+    <script>
+        let clicks = 0;
+        let timeLeft = 10;
+        let timerInterval;
+        const heart = document.getElementById('heart');
+        const gameMessage = document.getElementById('gameMessage');
+        const buttons = document.getElementById('buttons');
+        const winSound = document.getElementById('winSound');
+        const loseSound = document.getElementById('loseSound');
+        const clicksCounter = document.getElementById('clicksCounter');
+        const startButton = document.getElementById('startButton');
+        const circleTimer = document.getElementById('circleTimer');
+        const progressBar = document.getElementById('progressBar');
+        const timerText = document.getElementById('timerText');
+        const headerText = document.getElementById('headerText');
+        const introText = document.getElementById('introText');
+
+        heart.addEventListener('click', () => {
+            clicks++;
+            clicksCounter.innerText = `Cliques: ${clicks}`;
+            if (clicks <= 40) {
+                heart.style.transform = `scale(${1 + clicks * 0.025})`;
+            }
+        });
+
+        function startGame() {
+            clicks = 0;
+            timeLeft = 10;
+            updateProgressBar();
+            timerText.innerText = `${timeLeft}`;
+            clicksCounter.innerText = `Cliques: ${clicks}`;
+            circleTimer.style.display = 'flex';
+            clicksCounter.style.display = 'block';
+            heart.style.transform = 'scale(1)';
+            heart.style.display = 'block';
+            startButton.style.display = 'none';
+            gameMessage.style.display = 'none';
+            buttons.classList.add('hidden');
+            headerText.style.display = 'none';
+            introText.style.display = 'none';
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerText.innerText = `${timeLeft}`;
+                updateProgressBar();
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    endGame();
+                } else if (timeLeft <= 3) {
+                    timerText.classList.add('countdown');
+                } else {
+                    timerText.classList.remove('countdown');
+                }
+            }, 1000);
+        }
+
+        function updateProgressBar() {
+            const progress = (timeLeft / 10) * 283;
+            progressBar.style.strokeDashoffset = 283 - progress;
+        }
+
+        function endGame() {
+            let message = 'Tempo esgotado! Agora temos o seu resultado: ';
+            if (clicks >= 40) {
+                message += 'Você superou todas as expectativas! 💝';
+            } else if (clicks >= 30) {
+                message += 'Você preencheu meu coração completamente! 💘';
+            } else if (clicks >= 20) {
+                message += 'Você é a razão do meu sorriso! 🌟';
+            } else if (clicks >= 10) {
+                message += 'Você encheu meu coração de amor! 💖';
+            } else {
+                message += 'Faltou Amor e carinho Ainda tô Carente, Game Over! 💔';
+                loseSound.play();
+            }
+
+            gameMessage.innerText = message;
+            gameMessage.style.display = 'block';
+            buttons.classList.remove('hidden');
+            heart.style.display = 'none';
+            circleTimer.style.display = 'none';
+            clicksCounter.style.display = 'none';
+
+            if (clicks >= 10) {
+                winSound.play();
+            }
+        }
+
+        function nextGame() {
+            alert("Boa sorte no próximo minigame, Encontre o amor eu tentei fazer esse mais faltou algumas coisa meu amor desculpa e esse foi o macimo  que consegui! 💖🌟");
+            window.location.href = 'proximo_jogo.html';  // Ajuste esta linha com a URL da próxima página do jogo
+        }
+
+        function restartGame() {
+            startButton.style.display = 'block';
+            heart.style.display = 'none';
+            circleTimer.style.display = 'none';
+            clicksCounter.style.display = 'none';
+            gameMessage.style.display = 'none';
+            buttons.classList.add('hidden');
+            headerText.style.display = 'block';
+            introText.style.display =  'block';
+            headerText.style.display = 'block';
+            introText.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

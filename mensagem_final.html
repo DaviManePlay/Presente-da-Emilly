@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presente para Minha Namorada</title>
+    <style>
+        body {
+            font-family: 'Cursive', sans-serif;
+            background-color: #fff0f5;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .gift-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8bbd0;
+            position: relative;
+        }
+        .gift-box {
+            font-size: 100px;
+            cursor: pointer;
+            animation: float 2s ease-in-out infinite;
+        }
+        .start-button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #d81b60;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.3s;
+            animation: bounce 1.5s infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        @keyframes pop {
+            0% {
+                transform: scale(0);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: pop 0.5s forwards;
+        }
+        .heart:nth-child(2) { top: 20%; left: 40%; }
+        .heart:nth-child(3) { top: 30%; left: 60%; }
+        .heart:nth-child(4) { top: 50%; left: 50%; }
+        .heart:nth-child(5) { top: 70%; left: 40%; }
+        .heart:nth-child(6) { top: 80%; left: 60%; }
+        #content {
+            display: none;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            background-color: #fce4ec;
+            animation: fadeIn 2s;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        #content h2 {
+            color: #d81b60;
+            font-size: 24px;
+        }
+        #content p {
+            color: #880e4f;
+            font-size: 18px;
+        }
+        #slideshow img, #additional-content img, #additional-content video {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            display: none;
+            margin: 10px auto;
+            border: 5px solid #f8bbd0;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            animation: fadeIn 2s;
+        }
+        #additional-content img, #additional-content video {
+            display: block;
+        }
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            margin-top: 20px;
+            font-size: 18px;
+            color: #fff;
+            background-color: #d81b60;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .button:hover {
+            background-color: #c2185b;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="gift-wrapper">
+        <div class="gift-box" onclick="openGift()">🎁</div>
+        <button class="start-button" onclick="openGift()">Começar</button>
+        <div class="heart" style="display: none;">❤️</div>
+        <div class="heart" style="display: none;">❤️</div>
+        <div class="heart" style="display: none;">❤️</div>
+        <div class="heart" style="display: none;">❤️</div>
+        <div class="heart" style="display: none;">❤️</div>
+    </div>
+    <div id="content">
+        <h2>Querida Emilly,</h2>
+        <p>Desde o momento que te conheci, minha vida mudou para melhor.<br> O seu sorriso ilumina meus dias e a sua beleza é um presente que aprecio a cada momento.<br> Amo você de todo coração e quero estar ao seu lado para sempre.</p>
+        <div id="additional-content">
+            <p>Foi no começo quando estávamos nos conhecendo. Esse foi um dia inesquecível!</p>
+            <p>Fiquei muito sem graça nesse dia, amor, quando te falei que gostava de você,<br> kkkk, que vergonha! Amor, esse dia eu estava...</p>
+            <img src="foto1.jpg" alt="Foto 1">
+            <p>A escola é quando mais tá, kkkk.</p>
+            <video src="Vídeo do WhatsApp de 2025-01-30 à(s) 19.54.39_e85d2fcc.mp4" controls></video>
+            <p>Eu espero que você tenha gostado desse dia, amor.<br> Me esforcei muito para tentar deixar ele legal . Se pude deixar você feliz, me alegra muito poder deixar você feliz.</p>
+            <video src="Vídeo do WhatsApp de 2025-01-29 à(s) 19.09.27_a68c6a97.mp4" controls></video>
+            <p>Você é essa pessoa incrível e seu jeito único, kkk.</p>
+            <video src="Vídeo do WhatsApp de 2025-01-29 à(s) 19.09.28_5252fdcc.mp4" controls></video>
+            <p>Eu faria de tudo para tentar pelo menos deixar<br> você um pouquinho mais feliz e alegre.</p>
+            <img src="Imagem do WhatsApp de 2025-01-29 à(s) 19.09.23_1ebf24a2.jpg" alt="Foto 1">
+            <p>Incrível cada momento ao seu lado.</p>
+            <img src="foto4.jpg" alt="Foto 2">
+            <img src="Imagem do WhatsApp de 2025-01-29 à(s) 19.09.31_e754ebe1.jpg" alt="Foto 2">
+            <p>Adoro seu jeito único, amor, kkk. Tenta de tudo,<br> que menina especial você é uma joia única, amor.</p>
+            <video src="Vídeo do WhatsApp de 2025-01-30 à(s) 19.54.43_4fc76fc5.mp4" controls></video>
+            <p>Que pessoa mais linda que amo e incrível.</p>
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.44_d9fe33a0.jpg" alt="Foto 1">
+            <p>Amo muito você, minha princesa.💖💖💗</p>
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.57.05_76751bb2.jpg" >
+        </div>
+        <button class="button" onclick="showGallery()">Veja Nossos Momentos</button>
+        <div id="slideshow" style="display: none;">
+            <p>Momentos nossos e fotos nossas e suas heheh<br> te amoo muito espero que tenha gostado</p>
+            <img src="foto1.jpg" alt="Foto 3">
+            <img src="foto2.jpg" alt="Foto 4">
+            <img src="foto3.jpg" alt="Foto 5">
+            <img src="foto4.jpg" alt="Foto 4">
+            <img src="Imagem do WhatsApp de 2025-01-29 à(s) 19.09.23_1ebf24a2.jpg" alt="Foto 5">
+            <img src="Imagem do WhatsApp de 2025-01-29 à(s) 19.09.23_8232ce5f.jpg" alt="Foto 3">
+            <img src="Imagem do WhatsApp de 2025-01-29 à(s) 19.09.28_356eef25.jpg" alt="Foto 4">
+            <img src="Imagem do WhatsApp de 2025-01-29 à(s) 19.09.30_6caa7425.jpg" alt="Foto 5">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.37_fb4372a6.jpg" alt="Foto 4">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.39_4d2448c5.jpg" alt="Foto 5">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.40_2addf2f4.jpg" alt="Foto 3">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.40_8a031a4c.jpg" alt="Foto 4">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.41_b3f2afc6.jpg" alt="Foto 5">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.42_b527196a.jpg" alt="Foto 3">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.43_449cf95d.jpg" alt="Foto 4">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.44_d9fe33a0.jpg" alt="Foto 5">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.54.45_b92a3740.jpg" alt="Foto 4">
+            <img src="Imagem do WhatsApp de 2025-01-30 à(s) 19.57.05_76751bb2.jpg" alt="Foto 4">
+        </div>
+      </div>
+    <script>
+        function openGift() {
+            document.querySelector('.gift-wrapper').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
+            document.querySelectorAll('.heart').forEach(heart => {
+                heart.style.display = 'block';
+            });
+        }
+        function showGallery() {
+            document.querySelector('.button').style.display = 'none';
+            document.getElementById('additional-content').style.display = 'block';
+            document.getElementById('slideshow').style.display = 'block';
+            document.getElementById('background-music').play(); // Música começa a tocar
+            showSlides();
+        }
+        function showSlides() {
+            let slideIndex = 0;
+            const slides = document.querySelectorAll('#slideshow img');
+            function displaySlide() {
+                slides.forEach(slide => slide.style.display = 'none');
+                slideIndex++;
+                if (slideIndex > slides.length) { slideIndex = 1; }
+                slides[slideIndex - 1].style.display = 'block';
+                setTimeout(displaySlide, 3000);
+            }
+            displaySlide();
+        }
+    </script>
+    <audio id="background-music" src="musica_favorita.mp3" loop></audio>
+</body>
+</html>

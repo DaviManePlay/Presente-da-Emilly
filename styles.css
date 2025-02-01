@@ -1,0 +1,176 @@
+/* styles.css */
+body {
+    background-color: #ffebf1;
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: background-color 0.5s ease;
+}
+
+.hidden {
+    display: none;
+}
+
+.screen {
+    text-align: center;
+    width: 100%;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ff69b4;
+    text-shadow: 2px 2px #c2185b;
+}
+
+.heart-beating {
+    font-size: 3em;
+    color: #ff69b4;
+    margin: 20px 0;
+    animation: heartbeat 1s infinite;
+}
+
+.heart-beating-large {
+    font-size: 5em;
+    color: #ff69b4;
+    animation: heartbeat 1s infinite;
+}
+
+#start-button, #retry-button, #present-button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    background-color: #ff69b4;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#start-button:hover, #retry-button:hover, #present-button:hover {
+    background-color: #c2185b;
+    transform: scale(1.05);
+}
+
+#game-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#hearts-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+}
+
+.heart {
+    font-size: 2.5em;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.heart.correct::after {
+    content: '💖';
+}
+
+.heart::after {
+    content: '❤️';
+}
+
+.heart:hover {
+    transform: scale(1.2);
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.heart {
+    animation: heartbeat 1s infinite;
+}
+
+#message {
+    font-size: 1.2em;
+    margin-top: 20px;
+    color: #c2185b;
+}
+
+#timer {
+    font-size: 1.2em;
+    background-color: white;
+    padding: 10px;
+    border-radius: 50%;
+    border: 2px solid #ff69b4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+@keyframes countdown {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.5); }
+}
+
+.countdown {
+    animation: countdown 1s infinite alternate;
+}
+
+.heart-broken {
+    font-size: 3em;
+    color: #ff69b4;
+    margin: 20px 0;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.popup {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    color: #c2185b;
+}
+
+@media (max-width: 600px) {
+    .heart {
+        font-size: 2em;
+        margin: 5px;
+    }
+
+    .heart-beating-large {
+        font-size: 4em;
+    }
+
+    #start-button, #retry-button, #present-button {
+        font-size: 1.2em;
+        padding: 8px 16px;
+    }
+}
